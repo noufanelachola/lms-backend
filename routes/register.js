@@ -1,5 +1,6 @@
-const handleRegister = (req,res,db) => {
+const handleRegister = (req,res,db,bcrypt) => {
     const {username,password,school_name} = req.body;
+    const hashedPassword = bcrypt.hashSync(password);
     const currentDate = new Date();
     const renewDate = new Date(currentDate.getFullYear()+1, currentDate.getMonth(), currentDate.getDate());
     const status = currentDate <= renewDate ? 1 : 0 ;
@@ -7,7 +8,7 @@ const handleRegister = (req,res,db) => {
     db.transaction(trx => {
         trx.insert({
             username: username,
-            password: password,
+            password: hashedPassword,
             school_name: school_name,
             start_date: currentDate, 
             end_date: renewDate,
