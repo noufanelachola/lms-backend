@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
+app.use(cors());
 const knex = require("knex");
 const bcrypt = require("bcrypt-nodejs");
 
 const register = require("./controllers/school/register");
 const signin = require("./controllers/school/signin");
 const studentAdd = require("./controllers/student/studentAdd");
+const bookAdd = require("./controllers/book/bookAdd");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -34,6 +37,10 @@ app.post("/school/signin",(req,res) => {signin.handleSignIn(req,res,db,bcrypt)})
 
 // route to add students
 app.post("/student/add",(req,res) => {studentAdd.handleStudentAdd(req,res,db)});
+
+// route to add books
+app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
+
 
 app.listen(3000,() => {
     console.log(`App is running on port 3000`);
