@@ -1,19 +1,19 @@
 const handleSignIn = (req,res,db,bcrypt) => {
     const {username,password} = req.body;
-    db.select("password")
+    db.select("*")
         .from("school")
         .where("username",username)
         .then(school => {
             const access = bcrypt.compareSync(password,school[0].password);
             if(access){
-                res.json("Signed in successfully")
+                res.json(school[0]);
             } else {
-                res.status(400).json("Sign in failed!!")
+                res.status(400).json("Wrong Credentials!!");
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(400).json("error")
+            res.status(500).json("Internal server error");
         }
     );
 }

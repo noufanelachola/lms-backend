@@ -2,7 +2,12 @@ const handleRegister = (req,res,db,bcrypt) => {
     const {username,password,school_name} = req.body;
     const hashedPassword = bcrypt.hashSync(password);
     const currentDate = new Date();
-    const renewDate = new Date(currentDate.getFullYear()+1, currentDate.getMonth(), currentDate.getDate());
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth(); // Month is zero-based
+    const day = currentDate.getDate();
+
+    const currentDateOnly = new Date(year, month-1, day);
+    const renewDate = new Date(year+1, month-1, day);
     const status = currentDate <= renewDate ? 1 : 0 ;
 
     db.transaction(trx => {
@@ -10,7 +15,7 @@ const handleRegister = (req,res,db,bcrypt) => {
             username: username,
             password: hashedPassword,
             school_name: school_name,
-            start_date: currentDate, 
+            start_date: currentDateOnly, 
             end_date: renewDate,
             is_active: status
         })
