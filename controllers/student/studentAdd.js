@@ -1,8 +1,8 @@
 const handleStudentAdd = (req,res,db) => {
-    const {schoolUsername,studentName,studentClass,admissionNumber} = req.body;
+    const {schoolId,studentName,studentClass,admissionNumber} = req.body;
 
     db.insert({
-            schoolusername:schoolUsername,
+            schoolid:schoolId,
             studentname:studentName,
             studentclass:studentClass,
             admissionnumber:admissionNumber
