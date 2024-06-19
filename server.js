@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt-nodejs");
 const register = require("./controllers/school/register");
 const signin = require("./controllers/school/signin");
 const studentAdd = require("./controllers/student/studentAdd");
+const studentCount = require("./controllers/student/studentCount");
 const bookAdd = require("./controllers/book/bookAdd");
 
 app.use(express.json());
@@ -26,9 +27,10 @@ const db = knex({
 
 
 app.get("/",(req,res) => {
-    db.select("*").from("school").then(data => res.json(data))
-        .catch(err => res.status(400).json("error"));
-})
+    db.select("*").from("school")
+    .then(data => res.json(data))
+    .catch(err => res.status(400).json("error"));
+});
 
 // route to register schools by admin
 app.post("/school/register",(req,res) => {register.handleRegister(req,res,db,bcrypt)});
@@ -37,6 +39,8 @@ app.post("/school/signin",(req,res) => {signin.handleSignIn(req,res,db,bcrypt)})
 
 // route to add students
 app.post("/student/add",(req,res) => {studentAdd.handleStudentAdd(req,res,db)});
+
+app.get("/student/count", (req,res) => {studentCount.handleStudentCount(req,res,db)});
 
 // route to add books
 app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
