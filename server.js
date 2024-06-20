@@ -10,6 +10,8 @@ const signin = require("./controllers/school/signin");
 const studentAdd = require("./controllers/student/studentAdd");
 const studentCount = require("./controllers/student/studentCount");
 const bookAdd = require("./controllers/book/bookAdd");
+const bookTotalCount = require("./controllers/book/bookTotalCount");
+const bookStockCount = require("./controllers/book/bookStockCount");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +46,8 @@ app.get("/student/count", (req,res) => {studentCount.handleStudentCount(req,res,
 
 // route to add books
 app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
+app.get("/book/totalcount",(req,res) => {bookTotalCount.handleBookTotalCount(req,res,db)});
+app.get("/book/stockcount",(req,res) => {bookStockCount.handleBookStockCount(req,res,db)});
 
 
 app.listen(3000,() => {
