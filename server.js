@@ -9,6 +9,7 @@ const register = require("./controllers/school/register");
 const signin = require("./controllers/school/signin");
 const studentAdd = require("./controllers/student/studentAdd");
 const studentCount = require("./controllers/student/studentCount");
+const studentGet = require("./controllers/student/studentGet");
 const bookAdd = require("./controllers/book/bookAdd");
 const bookTotalCount = require("./controllers/book/bookTotalCount");
 const bookStockCount = require("./controllers/book/bookStockCount");
@@ -41,8 +42,8 @@ app.post("/school/signin",(req,res) => {signin.handleSignIn(req,res,db,bcrypt)})
 
 // route to add students
 app.post("/student/add",(req,res) => {studentAdd.handleStudentAdd(req,res,db)});
-
 app.get("/student/count", (req,res) => {studentCount.handleStudentCount(req,res,db)});
+app.get("/student/get", (req,res) => {studentGet.handleStudentGet(req,res,db)});
 
 // route to add books
 app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
