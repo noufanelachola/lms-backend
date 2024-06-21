@@ -1,10 +1,16 @@
 const handleStudentGet = (req,res,db) => {
-    const {schoolId} = req.query;
+    const {schoolId,search} = req.query;
 
-    db.from("students")
+    let query = db.from("students")
     .select("*")
     .where({schoolid : schoolId})
-    .then(students => res.json(students))
+    .orderBy("studentname");
+
+    if(search){
+        query = query.andWhere("studentname","ILIKE",`%${search}%`);
+    }
+
+    query.then(students => res.json(students))
     .catch(error => {
         res.status(400).json("Error fetching students");
         console.log(error);
