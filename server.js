@@ -14,6 +14,7 @@ const bookAdd = require("./controllers/book/bookAdd");
 const bookTotalCount = require("./controllers/book/bookTotalCount");
 const bookStockCount = require("./controllers/book/bookStockCount");
 const bookGet = require("./controllers/book/bookGet");
+const assign = require("./controllers/assign/assign");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,6 +53,8 @@ app.get("/book/totalcount",(req,res) => {bookTotalCount.handleBookTotalCount(req
 app.get("/book/stockcount",(req,res) => {bookStockCount.handleBookStockCount(req,res,db)});
 app.get("/book/get",(req,res) => {bookGet.handleBookGet(req,res,db)});
 
+
+app.post("/assign",(req,res) => {assign.assign(req,res,db)})
 
 app.listen(3000,() => {
     console.log(`App is running on port 3000`);
