@@ -25,7 +25,7 @@ const handleAssignGet = (req,res,db) => {
         "s.admissionnumber",
         "b.bookname",
         "b.bookauthor"
-    ).where("t.schoolid",schoolId)
+    ).where({"t.schoolid" : schoolId,status:"pending"})
     .then(transaction => res.json(transaction))
     .catch(error => {
         res.status(400).json("couldnt get the assign students");
