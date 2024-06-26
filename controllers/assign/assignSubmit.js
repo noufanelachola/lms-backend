@@ -6,7 +6,7 @@ const handleAssignSubmit = (req,res,db) => {
     db.transaction(trx => {
         trx("transactions")
             .update({status : "submitted"})
-            .where({schoolid : schoolId, transactionid : transactionId})
+            .where({schoolid : schoolId, transactionid : transactionId, bookid : bookId})
             .then(() => {
                 return trx("books")
                 .where({schoolid : schoolId, bookid : bookId})
