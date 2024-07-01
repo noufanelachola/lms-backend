@@ -11,6 +11,7 @@ const studentAdd = require("./controllers/student/studentAdd");
 const studentCount = require("./controllers/student/studentCount");
 const studentWithBooksCount = require("./controllers/student/studentWithBooksCount");
 const studentGet = require("./controllers/student/studentGet");
+const studentDelete = require("./controllers/student/studentDelete");
 const bookAdd = require("./controllers/book/bookAdd");
 const bookTotalCount = require("./controllers/book/bookTotalCount");
 const bookStockCount = require("./controllers/book/bookStockCount");
@@ -51,6 +52,7 @@ app.post("/student/add",(req,res) => {studentAdd.handleStudentAdd(req,res,db)});
 app.get("/student/count", (req,res) => {studentCount.handleStudentCount(req,res,db)});
 app.get("/student/withbookscount", (req,res) => {studentWithBooksCount.handleStudentWithBooksCount(req,res,db)});
 app.get("/student/get", (req,res) => {studentGet.handleStudentGet(req,res,db)});
+app.delete("/student/delete", (req,res) => {studentDelete.handleStudentDelete(req,res,db)});
 
 // route to add books
 app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
