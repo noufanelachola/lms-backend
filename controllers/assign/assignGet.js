@@ -15,7 +15,9 @@ const handleAssignGet = (req,res,db) => {
             "s.studentclass",
             "s.admissionnumber",
             "b.bookname",
-            "b.bookauthor"
+            "b.bookauthor",
+            "b.totalcopies",
+            "b.availablecopies"
         ).where({"t.schoolid" : schoolId});
 
     if (studentId){

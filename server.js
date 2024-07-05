@@ -16,6 +16,7 @@ const bookAdd = require("./controllers/book/bookAdd");
 const bookTotalCount = require("./controllers/book/bookTotalCount");
 const bookStockCount = require("./controllers/book/bookStockCount");
 const bookGet = require("./controllers/book/bookGet");
+const bookDelete = require("./controllers/book/bookDelete")
 const assign = require("./controllers/assign/assign");
 const assignGet = require("./controllers/assign/assignGet");
 const assignSubmit = require("./controllers/assign/assignSubmit");
@@ -59,6 +60,7 @@ app.post("/book/add",(req,res) => {bookAdd.handleBookAdd(req,res,db)});
 app.get("/book/totalcount",(req,res) => {bookTotalCount.handleBookTotalCount(req,res,db)});
 app.get("/book/stockcount",(req,res) => {bookStockCount.handleBookStockCount(req,res,db)});
 app.get("/book/get",(req,res) => {bookGet.handleBookGet(req,res,db)});
+app.delete("/book/delete", (req,res) => {bookDelete.handleBookDelete(req,res,db)});
 
 
 // route to assign
