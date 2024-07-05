@@ -1,5 +1,5 @@
 const handleAssignGet = (req,res,db) => {
-    const {schoolId,studentId,status} = req.query;
+    const {schoolId,studentId,bookId,status} = req.query;
 
     let query = db.from("transactions as t")
         .join("students as s","t.studentid","s.studentid")
@@ -20,6 +20,9 @@ const handleAssignGet = (req,res,db) => {
 
     if (studentId){
         query = query.andWhere("s.studentid",studentId);
+    }
+    else if(bookId){
+        query = query.andWhere("b.bookid",bookId);
     }
     
     if (status === "pending"){
