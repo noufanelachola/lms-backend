@@ -7,7 +7,8 @@ const handleSignIn = (req,res,db,bcrypt) => {
         "school_name",
         db.raw("TO_CHAR(start_date, 'DD-MM-YYYY') as start_date"),
         db.raw("TO_CHAR(end_date, 'DD-MM-YYYY') as end_date"),
-        "is_active"
+        "is_active",
+        db.raw("DATE_PART('day', AGE(end_date::date, start_date::date)) as date_left")
     )
     .from("school")
     .where("username",username)
